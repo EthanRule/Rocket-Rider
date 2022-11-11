@@ -13,6 +13,26 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Input.GetKey(KeyCode(KeyCode));
+        ProcessThrust();
+        ProcessRotation();
+    }
+
+    void ProcessThrust()
+    {
+        if (Input.GetKey(KeyCode.Space))
+        {
+            Debug.Log("Pressed SPACE - Thrust");
+        }
+    }
+    void ProcessRotation()
+    {
+        if (Input.GetKey(KeyCode.A))
+        {
+            Debug.Log("Rotate left");
+        }
+        else if (Input.GetKey(KeyCode.D))
+        {
+            Debug.Log("Rotate right");
+        }
     }
 }
