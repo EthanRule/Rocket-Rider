@@ -5,6 +5,7 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
     [SerializeField] float mainThrust = 100f;
+    [SerializeField] float rotationThrust = 100f;
     Rigidbody rb;
 
     // Start is called before the first frame update
@@ -31,11 +32,16 @@ public class Movement : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.A))
         {
-            Debug.Log("Rotate left");
+            Rotation(rotationThrust);
         }
         else if (Input.GetKey(KeyCode.D))
         {
-            Debug.Log("Rotate right");
+            Rotation(-rotationThrust);
         }
+    }
+
+    void Rotation(float rotationThisFrame)
+    {
+        transform.Rotate(Vector3.forward * rotationThisFrame * Time.deltaTime);
     }
 }
