@@ -33,46 +33,70 @@ public class Movement : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Space))
         {
-
-            rb.AddRelativeForce(Vector3.up * mainThrust * Time.deltaTime);
-            if (!audioSource.isPlaying)
-            {
-                audioSource.PlayOneShot(mainEngine);
-            }
-            if (!mainThruster.isPlaying)
-            {
-                mainThruster.Play();
-            }
+            StartThrusting();
         }
         else
         {
-            audioSource.Stop();
-            mainThruster.Stop();
+            StopThrusting();
         }
     }
+
     void ProcessRotation()
     {
         if (Input.GetKey(KeyCode.A))
         {
-            Rotation(rotationThrust);
-            if (!rightThruster.isPlaying)
-            {
-                rightThruster.Play();
-            }
+            RotateLeft();
         }
         else if (Input.GetKey(KeyCode.D))
         {
-            Rotation(-rotationThrust);
-            if (!leftThruster.isPlaying)
-            {
-                leftThruster.Play();
-            }
+            RotateRight();
         }
         else
         {
-            leftThruster.Stop();
-            rightThruster.Stop();
+            StopRotating();
         }
+    }
+
+    void StartThrusting()
+    {
+        rb.AddRelativeForce(Vector3.up * mainThrust * Time.deltaTime);
+        if (!audioSource.isPlaying)
+        {
+            audioSource.PlayOneShot(mainEngine);
+        }
+        if (!mainThruster.isPlaying)
+        {
+            mainThruster.Play();
+        }
+    }
+    void StopThrusting()
+    {
+        audioSource.Stop();
+        mainThruster.Stop();
+    }
+
+    void RotateLeft()
+    {
+        Rotation(rotationThrust);
+        if (!rightThruster.isPlaying)
+        {
+            rightThruster.Play();
+        }
+    }
+
+    void RotateRight()
+    {
+        Rotation(-rotationThrust);
+        if (!leftThruster.isPlaying)
+        {
+            leftThruster.Play();
+        }
+    }
+
+    void StopRotating()
+    {
+        leftThruster.Stop();
+        rightThruster.Stop();
     }
 
     void Rotation(float rotationThisFrame)
